@@ -25,9 +25,10 @@ and we noticed that it works well by still receiving "success Q3", as you can se
 
 ### Q4)
 For gettftp :
-#### a) We constructed a correctly formed read request (RRQ), and then sent it to the
-server.
-#### b) We received a file consisting of a single data packet (DAT) and its acknowledgement (ACK) and then looked
+
+a) We constructed a correctly formed read request (RRQ), and then sent it to the server.
+
+b) We received a file consisting of a single data packet (DAT) and its acknowledgement (ACK) and then looked
 
 ![](images/Q4_result.png)
 ![](images/Q4_code.png)
