@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <unistd.h>
 
 #include <string.h>
 
@@ -32,14 +33,32 @@ int main(int argc, char * argv[]) {
 	
 	// Reserving a connection socket to the server
 	int sock;
-	if ((sock = socket(PF_LOCAL, SOCK_DGRAM, 0)) < 0) {
-		printf("stocket error\n");
+	if ((sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) < 0) {
+		printf("socket error\n");
 		exit(EXIT_FAILURE);
 	}
+	//connect(sock, res->ai_addr, sizeof(struct stockaddr));
 	
-	printf("success Q3\n");
+	printf("send\n");
+	// Building a read query
+	char buf[300];
+	sprintf(buf, "01%s0octet0", argv[2]); // Send the file name
+	// Send the query
+	if (sendto(sock, buf, strlen(buf), MSG_EOR, res->ai_addr, res->ai_addrlen) < 0) {
+		printf("sendto error\n");
+		exit(EXIT_FAILURE);
+	}
+	printf("recv\n");
+	
+	// Receiving a file consisting of a single data packet
+	char bufr[300];
+	if (recv(sock, &bufr, strlen(buf), MSG_EOR) < 0) {
+		printf("recv error\n");
+		exit(EXIT_FAILURE);
+	}
+	printf("end recv\n");
+	printf("%s\n", bufr);
+	
+	printf("success Q4.a\n");
 	exit(EXIT_SUCCESS);
 }
-
-
-
