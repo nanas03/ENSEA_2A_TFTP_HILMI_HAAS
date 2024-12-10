@@ -29,6 +29,9 @@ int main(int argc, char * argv[]) {
 		fprintf(stderr, "getaddrinfo error %s\n", gai_strerror(e));
 		exit(EXIT_FAILURE);
 	}
+	
+	printf("success\n");
+	exit(EXIT_SUCCESS);
 }
 
 
