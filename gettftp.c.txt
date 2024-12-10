@@ -8,9 +8,9 @@
 #include <string.h>
 
 int main(int argc, char * argv[]) {
-	// We need at least 3 args
-	if (argc < 3) {
-		// There are less than 3 arguments
+	// We need at least 4 args
+	if (argc < 4) {
+		// There are less than 4 arguments
 		printf("Error: not enough args\n");
 		exit(EXIT_FAILURE);
 	}
@@ -30,7 +30,14 @@ int main(int argc, char * argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	
-	printf("success\n");
+	// Reserving a connection socket to the server
+	int sock;
+	if ((sock = socket(PF_LOCAL, SOCK_DGRAM, 0)) < 0) {
+		printf("stocket error\n");
+		exit(EXIT_FAILURE);
+	}
+	
+	printf("success Q3\n");
 	exit(EXIT_SUCCESS);
 }
 
