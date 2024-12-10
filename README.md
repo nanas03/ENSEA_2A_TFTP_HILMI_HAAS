@@ -1,32 +1,34 @@
 # ENSEA_2A_TFTP_HILMI_HAAS
 
-## Objectifs : Réaliser un client TFTP, à l’aide des RFC et de captures wireshark.
+## Objectives: Create a TFTP client, using RFCs and wireshark captures.
 
+### Q1)
+We tested the three arguments: The program sends two arguments on the command line which are the server address
+and the name of the file to download or upload, as you can see in the screenshots below:
 
-### Q1) 
-Nous avons testé les trois arguments : Le programme envoi deux arguments en ligne de commande qui sont l'adresse du serveur 
-et le nom du fichier à télécharger ou téléverser, comme vous pouvez le voir dans les captures ci-dessous : 
+![](images/Q1_result.png)
+![](images/Q1_code.png)
 
-images/Q1).code.jpg
+### Q2)
+Then, we called getaddrinfo to get the server address and we noticed that it works well
+because we saw the display of "success" without error as shown below:
 
-### Q2) 
-Ensuite, nous avons fait appel à getaddrinfo afin d'obtenir l'adresse du serveur et nous avons remarqué que cela marche bien 
-car nous avons bien vu l'affichage de "succes" sans erreur comme indiqué ci-dessous : 
+![](images/Q2_result.png)
+![](images/Q2_code.png)
 
-images/Q2_result.png
+### Q3)
+Then, we created a UDP socket knowing that the TFTP protocol uses UDP, because it is light and fast, and then we tested it
+and we noticed that it works well by still receiving "success Q3", as you can see in the screenshots below:
 
+![](images/Q3_result.png)
+![](images/Q3_code.png)
 
-### Q3) 
-Puis, nous avons crée un socket UDP sachant que le protocole TFTP utilise UDP, car il est léger et rapide, et ensuite nous l'avons testé 
-et nous avons remarqué que cela marche bien en recevant encore "success Q3", comme vous le remarquer dans les captures ci-dessous : 
+### Q4)
+For gettftp :
+#### a) We constructed a correctly formed read request (RRQ), and then sent it to the
+server.
+#### b) We received a file consisting of a single data packet (DAT) and its acknowledgement (ACK) and then looked
 
-images/Q3_code.png
-images/Q3_result.png
+![](images/Q4_result.png)
+![](images/Q4_code.png)
 
-### Q4) 
-Pour gettftp :
-#### a) Nous avons construit une requête en lecture (RRQ) correctement formée, et nous l'avons envoyé par la suite  au
-serveur.
-
-
-### b) Nous avons reçu un fichier constitué d’un seul paquet de données (DAT) et son acquittement (ACK) et nous avons regardé ensuite
