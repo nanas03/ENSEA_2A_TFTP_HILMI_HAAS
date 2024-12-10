@@ -6,7 +6,6 @@
 ### Q1) Nous avons testé les trois arguments : Le programme envoi deux arguments en ligne de commande qui sont l'adresse du serveur 
 et le nom du fichier à télécharger ou téléverser, comme vous pouvez le voir dans les captures ci-dessous : 
 
-images/Q1).code.jpg
 
 ### Q2) Ensuite, nous avons fait appel à getaddrinfo afin d'obtenir l'adresse du serveur et nous avons remarqué que cela marche bien 
 car nous avons bien vu l'affichage de "succes" sans erreur comme indiqué ci-dessous : 
