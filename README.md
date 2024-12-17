@@ -54,11 +54,18 @@ We also found on the internet that the opcodes:
 * 2 -> WRQ
 * 3 -> DATA
 * 4 -> ACK
+
 We used the DATA opcode to verify that what we received is indeed a file.
 
 ![](images/RRQ_WRQ.png)
 ![](images/DATA.png)
 ![](images/ACK.png)
 
+### Q5)
+
+We created puttftp using our working gettftp code,
+but we got an error while sending the file.
+
+![](Q5_result.jpg)
 
 

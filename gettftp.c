@@ -6,52 +6,54 @@
 #include <unistd.h>
 #include <string.h>
 
-#define BUFFER_SIZE 600
+#define BUFFER_SIZE 512
+// Opcode
 #define RRQ 1
 #define DATA 3
 #define ACK 4
 
 int main(int argc, char *argv[]) {
-	// We need at least 4 args: adress file port
-	if (argc < 4) {
-		// There are less than 4 arguments
-		printf("Error: not enough args\n");
+    // Q1) We need at least 4 args: adress file port
+    if (argc < 4) {
+        // There are less than 4 arguments
+        printf("Error: not enough args\n");
         exit(EXIT_FAILURE);
     }
-    
+   
+	// Q2)
     struct addrinfo *res, hints;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;        // IPv4
-    hints.ai_socktype = SOCK_DGRAM;   // Socket UDP
-    hints.ai_protocol = IPPROTO_UDP;  // Protocole UDP
+    hints.ai_socktype = SOCK_DGRAM;   // UDP Socket
+    hints.ai_protocol = IPPROTO_UDP;  // UDP Protocole
     // address resolution
     int e = getaddrinfo(argv[1], argv[3], &hints, &res);
     if (e != 0) {
         fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(e));
         exit(EXIT_FAILURE);
     }
-    
-    // Create a socket
+   
+    // Q3) Create a socket
     int sock;
     if ((sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) < 0) {
-		perror("socket error");
+        perror("socket error");
         exit(EXIT_FAILURE);
     }
 
     printf("Send request\n");
-    
-    // Send request
+   
+    // Q4.a) Send request
     char buf[BUFFER_SIZE];
     memset(buf, 0, BUFFER_SIZE);
-    buf[0] = 0; buf[1] = RRQ; // Opcode RRQ
-    strcpy(&buf[2], argv[2]);    // Nom du fichier
-    strcpy(&buf[2 + strlen(argv[2]) + 1], "octet"); // Mode "octet"
-    // Envoi de la requête RRQ
+    buf[0] = 0; buf[1] = RRQ; // Opcode Read
+    strcpy(&buf[2], argv[2]); // File name
+    strcpy(&buf[2 + strlen(argv[2]) + 1], "octet");
+    // Send the request RRQ
     if (sendto(sock, buf, 2 + strlen(argv[2]) + 1 + 6, 0, res->ai_addr, res->ai_addrlen) < 0) {
         perror("sendto error");
         exit(EXIT_FAILURE);
     }
-    
+   
     printf("Receive the file %s\n", argv[2]);
 
     // Received
@@ -64,6 +66,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     
+    // Q4.b & Q4.c) Received file and send ACK
     while (1) {
         // Received
         memset(buf, 0, BUFFER_SIZE);
@@ -80,7 +83,7 @@ int main(int argc, char *argv[]) {
 
             // Write in the file
             fwrite(&buf[4], 1, recv_size - 4, fp);
-            
+           
             // Send ACK for the block n°block_num
             char ack[4] = {0, ACK, buf[2], buf[3]};
             if (sendto(sock, ack, sizeof(ack), 0, (struct sockaddr*)&server_addr, server_addr_len) < 0) {
@@ -99,9 +102,5 @@ int main(int argc, char *argv[]) {
     freeaddrinfo(res); // Free the memory
     close(sock);
     printf("success Q4\n");
-	exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }
-            
-            
-            
-            
