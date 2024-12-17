@@ -66,6 +66,6 @@ We used the DATA opcode to verify that what we received is indeed a file.
 We created puttftp using our working gettftp code,
 but we got an error while sending the file.
 
-![](Q5_result.jpg)
+![](images/Q5_result.jpg)
 
 
