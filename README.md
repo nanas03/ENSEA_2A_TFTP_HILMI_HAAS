@@ -28,8 +28,37 @@ For gettftp :
 
 a) We constructed a correctly formed read request (RRQ), and then sent it to the server.
 
-b) We received a file consisting of a single data packet (DAT) and its acknowledgement (ACK) and then looked
+![](images/Q4.a_result.png)
+![](images/Q4.a_code.png)
 
-![](images/Q4_result.png)
-![](images/Q4_code.png)
+b) We received a file consisting of a single data packet (DAT) and its acknowledgement (ACK) and then looked.
+
+![](images/Q4.b_result.png)
+![](images/Q4.b.c_code.png)
+
+c) We receive a file consisting of several data packets (DAT) and their respective acknowledgments (ACK).
+
+![](images/Q4.c_result.png)
+![](images/Q4.b.c-2_code.png)
+
+Of course we must not forget to close the connection and free the memory. And send the success status.
+
+![](images/end_prog.png)
+
+We searched the internet to find the maximum size we can receive. We found that the maximum size is 512 bytes.
+
+![](images/paquet_and_size.png)
+
+We also found on the internet that the opcodes:
+* 1 -> RRQ
+* 2 -> WRQ
+* 3 -> DATA
+* 4 -> ACK
+We used the DATA opcode to verify that what we received is indeed a file.
+
+![](images/RRQ_WRQ.png)
+![](images/DATA.png)
+![](images/ACK.png)
+
+
 
