@@ -8,8 +8,8 @@ int main(int argc, char * argv[]) {
 		printf("Error: not enough args\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("%s %s\n", argv[1], argv[2]);
-	
+	printf("arg1: %s arg2: %s\n", argv[1], argv[2]);
+	/*
 	struct addrinfo *res;
 	
 	// Configure the servers
@@ -18,9 +18,9 @@ int main(int argc, char * argv[]) {
 	
 	int e = getaddrinfo(argv[1], argv[3], &hints, &res);
 	if (e != 0) { // If getaddrinfo send an error
-		fprintf(stderr, "getaddrinfo error %s\n", gai_strerror(e));
+		fprintf(stderr, "getaddrinfo error %d\n", gai_strerror(e));
 		exit(EXIT_FAILURE);
-	}
+	}*/
 }
 
 
