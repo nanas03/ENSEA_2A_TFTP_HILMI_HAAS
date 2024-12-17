@@ -6,11 +6,10 @@
 #include <unistd.h>
 #include <string.h>
 
-#define BUFFER_SIZE 516
+#define BUFFER_SIZE 600
 #define RRQ 1
 #define DATA 3
 #define ACK 4
-
 
 int main(int argc, char *argv[]) {
 	// We need at least 4 args: adress file port
@@ -53,7 +52,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     
-      printf("Receive the file %s\n", argv[2]);
+    printf("Receive the file %s\n", argv[2]);
 
     // Received
     struct sockaddr_in server_addr;
@@ -65,7 +64,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     
-     while (1) {
+    while (1) {
         // Received
         memset(buf, 0, BUFFER_SIZE);
         ssize_t recv_size = recvfrom(sock, buf, BUFFER_SIZE, 0, (struct sockaddr*)&server_addr, &server_addr_len);
